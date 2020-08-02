@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <div class="nav">
+      <router-link to="/">Calendar</router-link>
+    </div>
     <router-view />
   </div>
 </template>
