@@ -4,7 +4,12 @@ import WithEvents from "./WithEvents.vue";
 
 export default {
   name: "EventList",
-  components: { ScaleLoader, WithEvents }
+  components: { ScaleLoader, WithEvents },
+  methods: {
+    subscribe(event) {
+      console.log("Subscribe to", event.title);
+    }
+  }
 };
 </script>
 
@@ -13,7 +18,12 @@ export default {
     <div>
       <ScaleLoader v-if="isLoading" />
       <ul>
-        <li class="event" v-for="event in events" :key="event.title">
+        <li
+          class="event"
+          v-for="event in events"
+          :key="event.title"
+          @click="subscribe(event)"
+        >
           <img src="//placehold.it/50x50" />
           <p>{{ event.title }}</p>
         </li>
@@ -35,6 +45,7 @@ ul {
   border-radius: 5px;
   padding: 10px;
   color: #7ec699;
+  cursor: pointer;
 
   img {
     float: left;

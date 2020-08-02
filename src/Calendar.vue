@@ -20,6 +20,11 @@ export default {
       },
       events: []
     };
+  },
+  methods: {
+    subscribe({ event }) {
+      console.log("Subscribe to", event.title);
+    }
   }
 };
 </script>
@@ -28,9 +33,16 @@ export default {
   <WithEvents v-slot="{ events, isLoading }">
     <div>
       <ScaleLoader v-if="isLoading" />
-      <FullCalendar v-else :options="{ ...calendarOptions, events }" />
+      <FullCalendar
+        v-else
+        :options="{ ...calendarOptions, events, eventClick: subscribe }"
+      />
     </div>
   </WithEvents>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+::v-deep .fc-event {
+  cursor: pointer;
+}
+</style>
