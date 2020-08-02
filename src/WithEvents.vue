@@ -3,6 +3,12 @@ import { events } from "./events";
 
 export default {
   name: "WithEvents",
+  props: {
+    category: {
+      type: String,
+      default: null
+    }
+  },
   data() {
     return {
       isLoading: false,
@@ -23,9 +29,16 @@ export default {
       console.log("Subscribe to", event.title);
     }
   },
+  computed: {
+    filteredEvents() {
+      return this.events.filter(
+        e => e.category === this.category || !this.category
+      );
+    }
+  },
   render() {
     return this.$scopedSlots.default({
-      events: this.events,
+      events: this.filteredEvents,
       isLoading: this.isLoading,
       subscribe: this.subscribe
     });

@@ -5,12 +5,25 @@ import WithEvents from "./WithEvents.vue";
 export default {
   name: "EventList",
   components: { ScaleLoader, WithEvents },
+  data() {
+    return {
+      category: null
+    };
+  }
 };
 </script>
 
 <template>
-  <WithEvents v-slot="{ events, isLoading, subscribe }">
+  <WithEvents v-slot="{ events, isLoading, subscribe }" :category="category">
     <div>
+      Category:
+      <select v-model="category">
+        <option :value="null">All</option>
+        <option value="vue">Vue</option>
+        <option value="react">React</option>
+        <option value="angular">Angular</option>
+      </select>
+      <hr />
       <ScaleLoader v-if="isLoading" />
       <ul>
         <li
@@ -34,7 +47,7 @@ ul {
 
 .event {
   text-align: center;
-  width: 200px;
+  width: 300px;
   margin: 10px;
   background-color: #282c34;
   border-radius: 5px;
