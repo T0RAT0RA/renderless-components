@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Calendar from "../Calendar.vue";
+import EventList from "../EventList.vue";
 
 Vue.use(VueRouter);
 
@@ -9,6 +10,11 @@ const routes = [
     path: "/",
     name: "Calendar",
     component: Calendar
+  },
+  {
+    path: "/events",
+    name: "EventList",
+    component: EventList
   }
 ];
 
