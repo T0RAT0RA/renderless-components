@@ -5,16 +5,11 @@ import WithEvents from "./WithEvents.vue";
 export default {
   name: "EventList",
   components: { ScaleLoader, WithEvents },
-  methods: {
-    subscribe(event) {
-      console.log("Subscribe to", event.title);
-    }
-  }
 };
 </script>
 
 <template>
-  <WithEvents v-slot="{ events, isLoading }">
+  <WithEvents v-slot="{ events, isLoading, subscribe }">
     <div>
       <ScaleLoader v-if="isLoading" />
       <ul>

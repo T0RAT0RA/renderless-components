@@ -18,10 +18,16 @@ export default {
       this.isLoading = false;
     }, 1000);
   },
+  methods: {
+    subscribe(event) {
+      console.log("Subscribe to", event.title);
+    }
+  },
   render() {
     return this.$scopedSlots.default({
       events: this.events,
-      isLoading: this.isLoading
+      isLoading: this.isLoading,
+      subscribe: this.subscribe
     });
   }
 };

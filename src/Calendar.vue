@@ -20,22 +20,21 @@ export default {
       },
       events: []
     };
-  },
-  methods: {
-    subscribe({ event }) {
-      console.log("Subscribe to", event.title);
-    }
   }
 };
 </script>
 
 <template>
-  <WithEvents v-slot="{ events, isLoading }">
+  <WithEvents v-slot="{ events, isLoading, subscribe }">
     <div>
       <ScaleLoader v-if="isLoading" />
       <FullCalendar
         v-else
-        :options="{ ...calendarOptions, events, eventClick: subscribe }"
+        :options="{
+          ...calendarOptions,
+          events,
+          eventClick: e => subscribe(e.event)
+        }"
       />
     </div>
   </WithEvents>
