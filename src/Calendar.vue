@@ -1,13 +1,15 @@
 <script>
 import FullCalendar from "@fullcalendar/vue";
 import timeGridWeek from "@fullcalendar/timegrid";
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 import { events } from "./events";
 
 export default {
   name: "Calendar",
   components: {
-    FullCalendar
+    FullCalendar,
+    ScaleLoader
   },
   data() {
     return {
@@ -16,14 +18,17 @@ export default {
         plugins: [timeGridWeek],
         initialView: "timeGridWeek"
       },
+      isLoadingEvents: false,
       events: []
     };
   },
   created() {
+    this.isLoadingEvents = true;
     // Fetch events to be displayed in calendar
     // we use setTimeout to simulate the api call.
     setTimeout(() => {
       this.events = events;
+      this.isLoadingEvents = false;
     }, 1000);
   }
 };
@@ -31,7 +36,8 @@ export default {
 
 <template>
   <div>
-    <FullCalendar :options="{ ...calendarOptions, events }" />
+    <ScaleLoader v-if="isLoadingEvents" />
+    <FullCalendar v-else :options="{ ...calendarOptions, events }" />
   </div>
 </template>
 
