@@ -1,24 +1,12 @@
 # renderless-components
 
-## Project setup
-```
-npm install
-```
+This repository is part of the VueMontreal meetup presentation: [Renderless components](https://slides.com/sreiss/renderless-components).
 
-### Compiles and hot-reloads for development
-```
+Looking at the different commits, you'll see how one can use renderless components to improve application maintainability and scalability.
+
+## Project setup
+
+```bash
+npm ci
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
