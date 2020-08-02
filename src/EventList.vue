@@ -1,39 +1,25 @@
 <script>
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
-
-import { events } from "./events";
+import WithEvents from "./WithEvents.vue";
 
 export default {
   name: "EventList",
-  components: { ScaleLoader },
-  data() {
-    return {
-      isLoadingEvents: false,
-      events: []
-    };
-  },
-  created() {
-    this.isLoadingEvents = true;
-    // Fetch events to be displayed in calendar
-    // we use setTimeout to simulate the api call.
-    setTimeout(() => {
-      this.events = events;
-      this.isLoadingEvents = false;
-    }, 1000);
-  }
+  components: { ScaleLoader, WithEvents }
 };
 </script>
 
 <template>
-  <div>
-    <ScaleLoader v-if="isLoadingEvents" />
-    <ul>
-      <li class="event" v-for="event in events" :key="event.title">
-        <img src="//placehold.it/50x50" />
-        <p>{{ event.title }}</p>
-      </li>
-    </ul>
-  </div>
+  <WithEvents v-slot="{ events, isLoading }">
+    <div>
+      <ScaleLoader v-if="isLoading" />
+      <ul>
+        <li class="event" v-for="event in events" :key="event.title">
+          <img src="//placehold.it/50x50" />
+          <p>{{ event.title }}</p>
+        </li>
+      </ul>
+    </div>
+  </WithEvents>
 </template>
 
 <style lang="scss" scoped>
