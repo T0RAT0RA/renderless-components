@@ -3,6 +3,7 @@
     <div class="nav">
       <router-link to="/">Calendar</router-link>
       <router-link to="/events">Events List</router-link>
+      <router-link to="/events-carousel">Events Carousel</router-link>
     </div>
     <router-view />
   </div>

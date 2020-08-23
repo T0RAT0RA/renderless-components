@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Calendar from "../Calendar.vue";
 import EventList from "../EventList.vue";
+import EventCarousel from "../EventCarousel.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/events",
     name: "EventList",
     component: EventList
+  },
+  {
+    path: "/events-carousel",
+    name: "EventCarousel",
+    component: EventCarousel
   }
 ];
 
