@@ -1,43 +1,49 @@
 <script>
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
-import WithEvents from "./WithEvents.vue";
+import useEvents from "./composables/useEvents.js";
+
+import { ref } from "@vue/composition-api";
 
 export default {
   name: "EventList",
-  components: { ScaleLoader, WithEvents },
-  data() {
+  components: { ScaleLoader },
+  setup() {
+    const category = ref();
+    const { events, isLoading, subscribe } = useEvents(category);
+
     return {
-      category: null
+      category,
+      events,
+      isLoading,
+      subscribe
     };
   }
 };
 </script>
 
 <template>
-  <WithEvents v-slot="{ events, isLoading, subscribe }" :category="category">
-    <div>
-      Category:
-      <select v-model="category">
-        <option :value="null">All</option>
-        <option value="vue">Vue</option>
-        <option value="react">React</option>
-        <option value="angular">Angular</option>
-      </select>
-      <hr />
-      <ScaleLoader v-if="isLoading" />
-      <ul>
-        <li
-          class="event"
-          v-for="event in events"
-          :key="event.title"
-          @click="subscribe(event)"
-        >
-          <img src="//placehold.it/50x50" />
-          <p>{{ event.title }}</p>
-        </li>
-      </ul>
-    </div>
-  </WithEvents>
+  <div>
+    Category:
+    <select v-model="category">
+      <option :value="null">All</option>
+      <option value="vue">Vue</option>
+      <option value="react">React</option>
+      <option value="angular">Angular</option>
+    </select>
+    <hr />
+    <ScaleLoader v-if="isLoading" />
+    <ul>
+      <li
+        class="event"
+        v-for="event in events"
+        :key="event.title"
+        @click="subscribe(event)"
+      >
+        <img src="//placehold.it/50x50" />
+        <p>{{ event.title }}</p>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="scss" scoped>
