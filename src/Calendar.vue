@@ -2,14 +2,22 @@
 import FullCalendar from "@fullcalendar/vue";
 import timeGridWeek from "@fullcalendar/timegrid";
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
-import WithEvents from "./WithEvents.vue";
+import useEvents from "./composables/useEvents.js";
 
 export default {
   name: "Calendar",
   components: {
     FullCalendar,
-    ScaleLoader,
-    WithEvents
+    ScaleLoader
+  },
+  setup() {
+    const { events, isLoading, subscribe } = useEvents();
+
+    return {
+      events,
+      isLoading,
+      subscribe
+    };
   },
   data() {
     return {
@@ -17,27 +25,24 @@ export default {
         initialDate: "2020-08-02",
         plugins: [timeGridWeek],
         initialView: "timeGridWeek"
-      },
-      events: []
+      }
     };
   }
 };
 </script>
 
 <template>
-  <WithEvents v-slot="{ events, isLoading, subscribe }">
-    <div>
-      <ScaleLoader v-if="isLoading" />
-      <FullCalendar
-        v-else
-        :options="{
-          ...calendarOptions,
-          events,
-          eventClick: e => subscribe(e.event)
-        }"
-      />
-    </div>
-  </WithEvents>
+  <div>
+    <ScaleLoader v-if="isLoading" />
+    <FullCalendar
+      v-else
+      :options="{
+        ...calendarOptions,
+        events,
+        eventClick: e => subscribe(e.event)
+      }"
+    />
+  </div>
 </template>
 
 <style lang="scss" scoped>
